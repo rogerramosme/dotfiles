@@ -20,6 +20,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
+Plug 'leafgarland/typescript-vim'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
