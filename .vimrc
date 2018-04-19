@@ -43,6 +43,9 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Set mousescroll and selection
+set mouse=a
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPLEADER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
