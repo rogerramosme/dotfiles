@@ -27,6 +27,13 @@ runBashScripts() {
   read git_config_user_email
   git config --global user.email $git_config_user_email
   clear
+  echo "\nWant to set created branches origin with same as local?"
+  read setup_branch_origin_with_local
+  if echo "$setup_branch_origin_with_local" | grep -iq "^y" ;then
+    git config --global push.default current
+  else
+    clear
+  fi
   echo "\nI'm about to set as your default GIT editor as VIM and I highly recommend it.\n\n"
   echo "Can I do that for you? (y/n)\n\n"
   read git_core_editor_to_vim
