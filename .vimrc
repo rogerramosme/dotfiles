@@ -59,6 +59,9 @@ let g:ctrlp_by_filename = 1
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
+" Toggle NERDtree
+nmap <leader>ne :NERDTree<cr>
+
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
