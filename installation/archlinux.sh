@@ -27,7 +27,7 @@ runBashScripts() {
   read git_config_user_email
   git config --global user.email $git_config_user_email
   clear
-  echo "\nWant to set created branches origin with same as local?"
+  echo "\nWant to set created branches origin with same as local? (y/n)"
   read setup_branch_origin_with_local
   if echo "$setup_branch_origin_with_local" | grep -iq "^y" ;then
     git config --global push.default current
@@ -42,6 +42,7 @@ runBashScripts() {
   else
     echo "\nOk, it's on your hands. :) Let's move on"
   fi
+  gitAliases
   echo "\n\n\nDone of git globals, let's install some helpers"
   echo "\n\n\nStarting checking if you have wget"
   yaourt -S wget
@@ -66,6 +67,26 @@ runBashScripts() {
   echo "\n\n\n\n\n"
   echo "Everything's done! \n\n Make sure to mark \"Run command as a login shell\" option in your Terminal preferences to bash be interpreted."
 echo "\n\nDon't forget to restart your terminal after the installations"
+}
+
+gitAliases() {
+  echo "Whant to setup git aliases? (y/n)"
+  read wanna_set_git_aliases
+  if echo "$wanna_set_git_aliases" | grep -iq "^y" ;then
+    setGitAliases
+  else
+    clear
+    echo "Alrighty then =}"
+}
+
+setGitAliases() {
+  git config --global alias.co checkout
+  git config --global alias.br branch
+  git config --global alias.ci commit
+  git config --global alias.st status
+  git config --global alias.unstage 'reset HEAD --'
+  git config --global alias.visual '!gitk'
+  echo "Git aliases set sucessful"
 }
 
 greetings() {
