@@ -23,6 +23,7 @@ Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'scrooloose/nerdtree'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -60,7 +61,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Toggle NERDtree
-nmap <leader>ne :NERDTree<cr>
+map <C-f> :NERDTreeToggle<CR>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -185,8 +186,8 @@ autocmd BufWrite *.bashrc :call DeleteTrailingWS()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·
-set list
+" set list
+" set listchars=tab:»·,trail:·,nbsp:·
 
 " Let gitgutter already torned on
 let g:gitgutter_enabled = 1
