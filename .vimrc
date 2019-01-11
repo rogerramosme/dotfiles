@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 " FUZZY FINDER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'maksimr/vim-jsbeautify'
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -60,6 +61,9 @@ let g:ctrlp_by_filename = 1
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
+" Clear search hightlight
+nmap <leader>c :noh<cr>
+
 " Toggle NERDtree
 map <C-f> :NERDTreeToggle<CR>
 
@@ -73,6 +77,7 @@ vnoremap <leader>c "+y
 nnoremap <leader>v "+p
 nnoremap <leader>V "+P
 
+""""""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
@@ -84,6 +89,12 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 vnoremap << <gv
 vnoremap >> >gv
 vnoremap = =gv
+
+" Ale fixers configs
+let g:ale_fixers = {
+\ 'javascript': ['eslint']
+\}
+let g:ale_fix_on_save = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,7 +199,6 @@ autocmd BufWrite *.bashrc :call DeleteTrailingWS()
 " Display extra whitespace
 " set list
 " set listchars=tab:»·,trail:·,nbsp:·
-
 " Let gitgutter already torned on
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 0
@@ -310,7 +320,10 @@ set nowb
 set noswapfile
 
 " Filetypes support "
-au BufNewFile, BufRead *.ejs set syntax=html
+au BufNewFile,BufRead *.ejs set syntax=html
+au BufNewFile,BufRead *.pug set syntax=html
+au BufEnter,BufRead *.conf setf dosini
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
