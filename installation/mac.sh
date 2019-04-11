@@ -45,6 +45,13 @@ runBashScripts() {
   else
     echo "\nOk, it's on your hands. :) Let's move on"
   fi
+  echo "\nWant to set some git aliases to make you more productive? (y/n)"
+  read git_aliases
+  if echo "$git_aliases" | grep -iq "^y" ;then
+    setGitAliases
+  else
+    echo "\nAllright :("
+  fi
   echo "\n\n\nDone of git globals, let's install some helpers"
   echo "\n\n\nStarting checking if you have wget"
   brew install wget
