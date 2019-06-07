@@ -3,21 +3,15 @@
 call plug#begin('~/.vim/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FUZZY FINDER
+" My Awesome pluggins <3
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'maksimr/vim-jsbeautify'
-Plug 'junegunn/fzf.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'wavded/vim-stylus'
 Plug 'dracula/vim'
 Plug 'tomasr/molokai'
-Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
@@ -25,10 +19,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call plug#end()
-
-map <C-t> :FZF<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -48,6 +41,11 @@ set autoread
 " Set mousescroll and selection
 set mouse=a
 
+"Hide files into .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"Show dotfiles
+let g:ctrlp_show_hidden = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPLEADER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,7 +60,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Clear search hightlight
-nmap <leader>c :noh<cr>
+nmap <leader>c :nohl<cr>
 
 " Toggle NERDtree
 map <C-f> :NERDTreeToggle<CR>
@@ -94,6 +92,10 @@ vnoremap = =gv
 let g:ale_fixers = {
 \ 'javascript': ['eslint']
 \}
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warnint = '⚠️'
+
 let g:ale_fix_on_save = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -105,6 +107,10 @@ map k gk
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
+
+" Copy to clipboard
+noremap <leader>y "*y
+noremap <leader>p "*p
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -227,7 +233,7 @@ set whichwrap+=<,>,h,l
 
 " Set numbers
 set number
-map <leader>rn :set relativenumber!<cr>
+set relativenumber
 
 " Ignore case when searching
 set ignorecase
