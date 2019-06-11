@@ -20,6 +20,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'chrisbra/Colorizer'
 
 call plug#end()
 
@@ -74,6 +75,10 @@ vnoremap <leader>x "+d
 vnoremap <leader>c "+y
 nnoremap <leader>v "+p
 nnoremap <leader>V "+P
+
+" Fuzzy Finder
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
