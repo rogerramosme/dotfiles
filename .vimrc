@@ -21,7 +21,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'chrisbra/Colorizer'
-
+Plug 'yegappan/grep'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
