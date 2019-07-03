@@ -4,13 +4,12 @@ call plug#begin('~/.vim/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My Awesome pluggins <3
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'dracula/vim'
 Plug 'tomasr/molokai'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
@@ -21,8 +20,28 @@ Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'chrisbra/Colorizer'
-Plug 'yegappan/grep'
+Plug 'dyng/ctrlsf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'digitaltoad/vim-pug'
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Search mapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Opens search prompt
+nmap     <C-F>f <Plug>CtrlSFPrompt
+" Opens search prompt with visual selected word
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+" Exec search with visual selected word
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+" Opens search prompt with the current cursor word
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+"nmap     <C-F>p <Plug>CtrlSFPwordPath
+" Open search result panel
+nnoremap <C-F>o :CtrlSFOpen<CR>
+" Toggle search prompt
+nnoremap <C-F>t :CtrlSFToggle<CR>
+"inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Split order
