@@ -6,6 +6,8 @@ vim_installation() {
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   clear
+  apt-get install silversearcher-ag
+  clear
   vim -c "PlugInstall" -c "q" -c "q"
 }
 

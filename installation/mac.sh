@@ -6,7 +6,32 @@ vim_installation() {
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   clear
+  brew install the_silver_searcher
+  clear
   vim -c "PlugInstall" -c "q" -c "q"
+}
+
+setGitAliases() {
+  git config --global alias.co checkout
+  git config --global alias.br branch
+  git config --global alias.ci commit
+  git config --global alias.st status
+  git config --global alias.unstage "reset HEAD --"
+  git config --global alias.visual "!gitk"
+  git config --global alias.bd "branch -D"
+  git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  echo "Git aliases set sucessful"
+}
+
+greetings() {
+  clear
+  echo "\nHi $USER.\nDo you wanna proceed with the installation? (y/n)"
+  read answer
+  if echo "$answer" | grep -iq "^y" ;then
+    runBashScripts
+  else
+    echo "Ok, anything I'm here and you can also send me a message on Twitter: @matmarsiglio :) \nCheers, \n\nM.\n\n"
+  fi
 }
 
 runBashScripts() {
@@ -70,32 +95,16 @@ runBashScripts() {
     clear
     echo "Ok then ¯\_(ツ)_/¯"
   fi
+  echo "\nWant to enable key repeat? (y/n)"
+  read answer
+  if echo "$answer" | grep -iq "^y" ;then
+    defaults write -g ApplePressAndHoldEnabled -bool false
+  else
+    echo "No problem!"
+  fi
   echo "\n\n\n\n\n"
   echo "Everything's done! \n\n Make sure to mark \"Run command as a login shell\" option in your Terminal preferences to bash be interpreted."
 echo "\n\nDon't forget to restart your terminal after the installations"
-}
-
-setGitAliases() {
-  git config --global alias.co checkout
-  git config --global alias.br branch
-  git config --global alias.ci commit
-  git config --global alias.st status
-  git config --global alias.unstage "reset HEAD --"
-  git config --global alias.visual "!gitk"
-  git config --global alias.bd "branch -D"
-  git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-  echo "Git aliases set sucessful"
-}
-
-greetings() {
-  clear
-  echo "\nHi $USER.\nDo you wanna proceed with the installation? (y/n)"
-  read answer
-  if echo "$answer" | grep -iq "^y" ;then
-    runBashScripts
-  else
-    echo "Ok, anything I'm here and you can also send me a message on Twitter: @matmarsiglio :) \nCheers, \n\nM.\n\n"
-  fi
 }
 
 greetings
