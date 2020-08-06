@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomasr/molokai'
@@ -17,15 +17,25 @@ Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'scrooloose/nerdtree'
-"Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'chrisbra/Colorizer'
 Plug 'dyng/ctrlsf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 autocmd BufReadPost,BufNewFile *spec.js set filetype=jasmine.javascript syntax=jasmine
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Signify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '_'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Intelisense with coc
@@ -223,6 +233,7 @@ nmap <leader>c :nohl<cr>
 
 " Toggle NERDtree
 map <C-f> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -252,14 +263,16 @@ vnoremap >> >gv
 vnoremap = =gv
 
 " Ale fixers configs
-let g:ale_fixers = {
-\ 'javascript': ['eslint']
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '!!'
+let g:ale_linters = {
+\'javascript': ['flow', 'eslint'],
 \}
-
-let g:ale_sign_error = '❌'
-let g:ale_sign_warnint = '⚠️'
-
-let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\'javascript': ['eslint'],
+\}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -341,9 +354,9 @@ func! DeleteTrailingWS()
 endfunc
 
 " server
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.rb :call DeleteTrailingWS()
-autocmd BufWrite *.php :call DeleteTrailingWS()
+"autocmd BufWrite *.py :call DeleteTrailingWS()
+"autocmd BufWrite *.rb :call DeleteTrailingWS()
+"autocmd BufWrite *.php :call DeleteTrailingWS()
 
 " client
 autocmd BufWrite *.html :call DeleteTrailingWS()
@@ -598,4 +611,3 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
