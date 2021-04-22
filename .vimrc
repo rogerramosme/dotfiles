@@ -4,6 +4,10 @@
 call plug#begin('~/.vim/plugged')
 	" colorscheme
   Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'sickill/vim-monokai'
+  Plug 'cormacrelf/vim-colors-github'
+  Plug 'tomasiser/vim-code-dark'
 	" typescript support
 	Plug 'leafgarland/typescript-vim'
 	" javascript (and jsx) support
@@ -44,23 +48,27 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORSCHEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
-colorscheme material
+syntax enable
+colorscheme codedark
+" use the dark theme
+" set background=dark
+" let g:github_colors_block_diffmark = 0
 "
 " For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
+ if (has('nvim'))
+   let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+ endif
+ let g:rehash256 = 1
 
 " For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
 " Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
 " https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
-if (has('termguicolors'))
+ if (has('termguicolors'))
   set termguicolors
 endif
 
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-let g:material_theme_style = 'ocean'
+"let g:material_theme_style = 'darker'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -118,6 +126,12 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" Prettier command
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+" Prettier format on save
+nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIG
