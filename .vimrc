@@ -2,12 +2,14 @@
 " PLUGINS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-	" colorscheme
+	" colorschemes
   Plug 'kaicataldo/material.vim', { 'branch': 'main' }
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'sickill/vim-monokai'
   Plug 'cormacrelf/vim-colors-github'
   Plug 'tomasiser/vim-code-dark'
+  " Vim airline
+  Plug 'vim-airline/vim-airline'
 	" typescript support
 	Plug 'leafgarland/typescript-vim'
 	" javascript (and jsx) support
@@ -33,6 +35,41 @@ call plug#begin('~/.vim/plugged')
   Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPLEADER
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast savingme = 1
+nmap <leader>w :w!<cr>
+nmap <leader>q :q!<cr>
+
+" Clear search hightlight
+nmap <leader>c :nohl<cr>
+
+" Toggle NERDtree
+map <C-f> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" Ctrl+X, Ctrl+C and Ctrl+V
+" Only works after installing vim-gnome package on Ubuntu 10.04
+vnoremap <leader>x "+d
+vnoremap <leader>c "+y
+nnoremap <leader>v "+p
+nnoremap <leader>V "+P
+
+" Fuzzy Finder
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,6 +107,11 @@ endif
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
 "let g:material_theme_style = 'darker'
 
+" Vim airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'codedark'
+set laststatus=2
+set noshowmode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM COC 
@@ -131,7 +173,8 @@ nmap <leader>f  <Plug>(coc-format-selected)
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Prettier format on save
-nnoremap gp :silent %!prettier --stdin-filepath %<CR>
+nnoremap gp :Prettier<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIG
@@ -222,6 +265,7 @@ set tm=500
 " Highlight the current cursor line
 set cursorline
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXT, TAB AND INDENT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -259,24 +303,29 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE MAPPING, BACKUPS and UNDO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetypes support
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *spec.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-au BufReadPost,BufNewFile,BufRead *.spec.{js,ts,jsx,tsx} set filetype=jasmine.javascript syntax=jasmine
+au BufNewFile,BufRead *spec.tsx setlocal filetype=typescript.tsx
+au BufReadPost,BufNewFile,BufRead *.spec.js set filetype=jasmine.javascript syntax=jasmine
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL P (Fuzzy Finder)
@@ -288,6 +337,7 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 100
 map <leader>b :CtrlPBuffer<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL P (Fuzzy Finder)
@@ -307,38 +357,6 @@ nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 "inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPLEADER
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
-
-" Fast savingme = 1
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr>
-
-" Clear search hightlight
-nmap <leader>c :nohl<cr>
-
-" Toggle NERDtree
-map <C-f> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-" Ctrl+X, Ctrl+C and Ctrl+V
-" Only works after installing vim-gnome package on Ubuntu 10.04
-vnoremap <leader>x "+d
-vnoremap <leader>c "+y
-nnoremap <leader>v "+p
-nnoremap <leader>V "+P
-
-" Fuzzy Finder
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VISUAL MODE
@@ -379,6 +397,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -398,6 +417,7 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HELPER FUNCTIONS
