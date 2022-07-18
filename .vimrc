@@ -117,7 +117,7 @@ set noshowmode
 " VIM COC 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-json', 'coc-tsserver', 'coc-emmet', 'coc-tslint', 'coc-eslint', 'coc-prettier', 'coc-highlight']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-json', 'coc-tsserver', 'coc-emmet', 'coc-tslint', 'coc-eslint', 'coc-prettier', 'coc-highlight', 'coc-vetur']
 
 " Allways show signcolumn
 set signcolumn=yes
