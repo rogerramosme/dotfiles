@@ -11,6 +11,20 @@ vim_installation() {
   vim -c "PlugInstall" -c "q" -c "q"
 }
 
+node_installation() {
+  # installs nvm (Node Version Manager)
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+  # download and install Node.js (you may need to restart the terminal)
+  nvm install 20
+
+  # verifies the right Node.js version is in the environment
+  node -v # should print `v20.16.0`
+
+  # verifies the right npm version is in the environment
+  npm -v # should print `10.8.1`
+}
+
 runBashScripts() {
   clear
   echo "\nMoving scripts to your user directory..."
@@ -61,6 +75,15 @@ runBashScripts() {
   echo "Wanna install it? (y/n)"
   read wanna_install_vim
   if echo "$wanna_install_vim" | grep -iq "^y" ;then
+    vim_installation
+  else
+    clear
+    echo "Ok then ¯\_(ツ)_/¯"
+  fi
+  clear
+  echo "Wanna install Node? (y/n)"
+  read wanna_install_node
+  if echo "$wanna_install_node" | grep -iq "^y" ;then
     vim_installation
   else
     clear
